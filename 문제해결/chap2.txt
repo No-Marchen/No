@@ -1,0 +1,74 @@
+#include <stdio.h>
+
+void main(){
+	//연습1
+	/*int arr[10];
+	int i=0;
+	int min1,min2;
+	int temp;
+	while(i<10){
+		scanf("%d",&arr[i]);
+		i++;
+	}
+
+	for(i=1;i<10;i++){
+		if(i==1){
+			if(arr[0]<=arr[1]){
+				min1 = arr[0];
+				min2 = arr[1];
+			}
+			else{
+				min1 = arr[1];
+				min2 = arr[0];
+			}
+
+			
+
+		}
+		else{
+		if(arr[i]<=min1){
+			temp = min1;
+			min1 = arr[i];
+			if(temp<min2)
+				min2 = temp;
+		}
+		}
+		
+	}
+	i=0;
+	while(i<10){
+		printf("%d ",arr[i]);
+		i++;
+	}
+	printf("\nMinimun1 : %d, Minimun2 : %d\n",min1,min2);
+*/
+	//연습2
+	char * news[4] = {"북" , "동" , "서" ,"남"};
+	int x1,y1,ahead=-1;
+	int x2,y2;
+	
+		printf("현재 좌표와 이동할 방향(0~3) ");
+		while(!(ahead>-1 && ahead<4)){
+			scanf("%d %d %d",&x1,&y1,&ahead);
+			if(!(ahead>-1 && ahead<4))
+				printf("방향 (0~3)\n");
+		}
+		switch(ahead){
+		case 0:
+			y2 = y1+1;
+			x2 = x1;
+		case 1:
+			x2 = x1+1;
+			y2 = y1;
+		case 2:
+			x2 = x1-1;
+			y2 = y1;
+		case 3:
+			y2 = y1-1;
+			x2 = x1;
+	
+		};
+
+		printf("(%d,%d) -> (%d,%d) ahead %s\n",x1,y1,x2,y2,news[ahead]);
+
+}

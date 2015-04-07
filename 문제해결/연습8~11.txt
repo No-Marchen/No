@@ -1,0 +1,92 @@
+#include <stdio.h>
+
+void main(){
+	/*
+	//연습8
+	int a,b=-1;
+	int result=0;
+	int i;
+	while((b<0)){
+		scanf("%d %d",&a, &b);
+		if(b<0)
+			printf("b는 음이 아닌 정수를 입력해야합니다.\n");
+	}
+
+	result=1;
+
+	for(i=0;i<b;i++){
+		result = result*a;
+	}
+
+	printf("%d의 %d제곱은? : %d\n",a,b,result);
+	*/
+
+	/*
+	//연습9
+	int sum =0;
+	int tmp,count=1;
+	while(1){
+		scanf("%d",&tmp);
+		//odd
+		if(count%2!=0){
+			sum = sum+tmp;
+		}
+		else
+			sum = sum-tmp;
+
+		
+		if(sum==0){
+			printf("Count : %d\n",count);
+			break;
+		}
+		count++;
+			
+	}
+	*/
+	/*
+	//연습10
+	int i,n;
+	double result=0;
+	double count =1;
+	scanf("%d",&n);
+	for(i=0;i<n;i++){
+		if((i+1)&2!=0)
+			result = result + (double)(4/count);
+		else
+			result = result - (double)(4/count);
+		count= count+2;
+	}
+
+	printf("%d번째 항까지의 결과 : %f\n",n,result);
+	*/
+
+	//연습11
+	int isbn[9];
+	int result1=0,result2,i; 
+	int count1=0,count2=10;
+	while(count1<9){
+		scanf("%d",&isbn[count1]);
+		count1++;
+	}
+	
+	for(i=0;i<9;i++){
+		result1 = result1 + count2*isbn[i];
+		count2--;
+	}
+
+	for(i=0;i<9;i++){
+		result2 = result1+i;
+		if(result2%11==0){
+			printf("마지막 자리수 : %d\n",i);
+			break;
+		}
+		if(i==8)
+			printf("마지막 자리수 : x\n");
+	}
+
+
+		
+
+	
+
+}
