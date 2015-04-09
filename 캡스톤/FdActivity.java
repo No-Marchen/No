@@ -101,7 +101,9 @@ public class FdActivity extends FragmentActivity implements CvCameraViewListener
     private Mat                    mRgba;
     private Mat                    mGray;
     private File                   mCascadeFile;
+    private File                   mCascadeFile2;
     private CascadeClassifier      mJavaDetector;
+    private CascadeClassifier      mJavaDetector2;
     private DetectionBasedTracker  mNativeDetector;
     
     public int 				   faceNum=0; //페이스 변수;
@@ -168,13 +170,28 @@ public class FdActivity extends FragmentActivity implements CvCameraViewListener
                         mCascadeFile = new File(cascadeDir, "haarcascade_frontalface_alt.xml");
                         FileOutputStream os = new FileOutputStream(mCascadeFile);
 
+                        InputStream is2 = getResources().openRawResource(R.raw.haarcascade_eye);
+                        File cascadeDir2 = getDir("cascade", Context.MODE_PRIVATE);
+                        mCascadeFile2 = new File(cascadeDir2, "haarcascade_eye.xml");
+                        FileOutputStream os2 = new FileOutputStream(mCascadeFile2);
+
                         byte[] buffer = new byte[4096];
                         int bytesRead;
                         while ((bytesRead = is.read(buffer)) != -1) {
                             os.write(buffer, 0, bytesRead);
                         }
+                        
+                        byte[] buffer2 = new byte[4096];
+                        int bytesRead2;
+                        while ((bytesRead2 = is2.read(buffer2)) != -1) {
+                            os2.write(buffer2, 0, bytesRead2);
+                        }
+                        
                         is.close();
                         os.close();
+                        
+                        is2.close();
+                        os2.close();
 
                         mJavaDetector = new CascadeClassifier(mCascadeFile.getAbsolutePath());
                         if (mJavaDetector.empty()) {
@@ -182,10 +199,19 @@ public class FdActivity extends FragmentActivity implements CvCameraViewListener
                             mJavaDetector = null;
                         } else
                             Log.i(TAG, "Loaded cascade classifier from " + mCascadeFile.getAbsolutePath());
+                        
+
+                        mJavaDetector2 = new CascadeClassifier(mCascadeFile2.getAbsolutePath());
+                        if (mJavaDetector2.empty()) {
+                            Log.e(TAG, "Failed to load cascade classifier");
+                            mJavaDetector2 = null;
+                        } else
+                            Log.i(TAG, "Loaded cascade classifier from " + mCascadeFile2.getAbsolutePath());
 
                         mNativeDetector = new DetectionBasedTracker(mCascadeFile.getAbsolutePath(), 0);
 
                         cascadeDir.delete();
+                        cascadeDir2.delete();
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -616,12 +642,20 @@ public class FdActivity extends FragmentActivity implements CvCameraViewListener
 
         MatOfRect faces = new MatOfRect();
 
-        if (mDetectorType == JAVA_DETECTOR) {
+        if ((cur_sleepLevel==2)&&(mDetectorType == JAVA_DETECTOR)) {
             if (mJavaDetector != null)
                 mJavaDetector.detectMultiScale(mGray, faces, 1.1, 2, 2, // TODO: objdetect.CV_HAAR_SCALE_IMAGE
                         new Size(mAbsoluteFaceSize, mAbsoluteFaceSize), new Size());
-            	
+            Log.i(TAG, "Detector");
         }
+
+        else if ((cur_sleepLevel==1)&&(mDetectorType == JAVA_DETECTOR)) {
+            if (mJavaDetector2 != null)
+                mJavaDetector2.detectMultiScale(mGray, faces, 1.1, 2, 2, // TODO: objdetect.CV_HAAR_SCALE_IMAGE
+                        new Size(mAbsoluteFaceSize, mAbsoluteFaceSize), new Size());
+            Log.i(TAG, "Detector2");
+        }
+        
         Rect[] facesArray = faces.toArray();
         
         faceNum=faces.toArray().length;			// Number of faces
