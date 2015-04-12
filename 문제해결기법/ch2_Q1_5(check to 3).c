@@ -4,9 +4,12 @@
 				chapter 2 Array
 					0401~
 
+				0410 check Q1,Q2,Q3
+
 ********************************************************/
 
 #include <stdio.h>
+#include <math.h>
 
 void Q1();
 void Q2();
@@ -17,8 +20,9 @@ void Q5();
 void main(){
 	//Q1();
 	//Q2();
-	Q3();
-	//Q4();
+	//Q3();
+	Q4();
+	//Q5();
 }
 
 void Q1(){
@@ -26,7 +30,7 @@ void Q1(){
 	int arr[10];
 	int i=0;
 	int min1,min2;
-	int temp;
+
 	printf("Please Enter numbers\n");
 	while(i<10){
 		printf("%d : ",i+1);
@@ -48,28 +52,49 @@ void Q1(){
 		else{
 			//value <= min1		
 			if(arr[i]<=min1){
-				temp = min1;
+				min2 = min1;
 				min1 = arr[i];
-				if(temp<min2)
-					min2 = temp;
+			//min1 < value <= min2
+			}
+			else if(arr[i]<=min2)
+				min2 = arr[i];
 		}
-		//min1 < value <= min2
-		if(arr[i]<=min2 && arr[i]>min1)
-			min2 = arr[i];
-
-		}
-		
 	}
-	i=0;
-	while(i<10){
+	
+	for(i=0;i<10;i++)
 		printf("%d ",arr[i]);
-		i++;
-	}
+	
 	printf("\nMinimum1 : %d, Minimum2 : %d\n",min1,min2);
 }
 
 void Q2(){
 	/*				Chapter2 연습 2				 */
+	int arr[10];
+	int i=0;
+	double temp=0;
+	double SD;
+
+	double avg=0;
+	printf("Please Enter numbers\n");
+	while(i<10){
+		printf("%d : ",i+1);
+		scanf("%d",&arr[i]);
+		avg = avg+arr[i];
+		i++;
+	}
+
+	avg = (double)avg/10;
+
+	for(i=0;i<10;i++)
+		temp = temp + ((arr[i]-avg)*(arr[i]-avg));
+	
+	SD = sqrt((0.1)*temp);
+	printf("Avg : %0.1f  SD : %0.1f\n",avg,SD);
+
+}
+
+void Q3(){
+	/*				Chapter2 연습 3				 */
 	char * news[4] = {"북" , "동" , "서" ,"남"};
 	int x1,y1,ahead=-1;
 	int x2,y2;
@@ -104,26 +129,29 @@ void Q2(){
 	
 }
 
-void Q3(){
-	/*				Chapter2 연습 3				 */
-	int data[100];
+void Q4(){
+	/*				Chapter2 연습 4				 */
+	int data[10];
 	int n=0,i;
+	int count=0;
 	int value,findValue;
-	printf("Enter at most 100 positive integers and press Ctl-z.\n");
+	printf("Enter Numbers : \n");
 	
-	while (scanf("%d", &value) != EOF) {
-		i=n-1;
+	while (count<10) {
+		scanf("%d", &value);
+		i=9;
 		while (i>=0 && data[i]>value) {
 			data[i+1] = data[i];
 			i--;
 			}
 		data[i+1] = value;
 		n++;
+		count++;
 	}
 
 	for (i = 0; i < n; i++)
 		printf("%d ", data[i]);
-
+	/*
 	printf("\nEnter positive integers\n");
 	scanf("%d",&findValue);
 
@@ -144,10 +172,10 @@ void Q3(){
 	for (i = 0; i < n; i++)
 		printf("%d ", data[i]);
 
-	printf(" n : %d ", n);
+	printf(" n : %d ", n);*/
 }
-void Q4(){
-	/*				Chapter2 연습 4				 */
+void Q5(){
+	/*				Chapter2 연습 5				 */
 	int numbers[100];
 	int N=0,i=0;
 	int count = 1, Max_count=0;
@@ -179,8 +207,4 @@ void Q4(){
 		}
 	}
 	printf("%d(%d,%d) \n",Max_count,first,end);
-}
-
-void Q5(){
-
 }
