@@ -47,7 +47,7 @@ void main(){
 	//Q15();
 	//Q16();
 	//Q17();
-	//Q18();	
+	Q18();	
 }
 
 void swap(int *a, int *b){
@@ -57,7 +57,12 @@ void swap(int *a, int *b){
 }
 
 void Q1(){
-	/*				Chapter1 연습 1				 */
+	/*
+	Chapter1 연습 1	
+	입력으로 2차방정식 ax2+bx+c=0의 계수 a, b, c를 받아서 근을 구해 출력
+	하는 프로그램을 작성하라. 여기서 a, b, c는 정수이다. (math.h가 제공
+	하는 sqrt(double) 함수를 사용하라. 실수근이 존재하지 않으면 NO ROOT를 출력한다.)
+	*/
 	int a,b,c;
 
 	double x1, x2;
@@ -75,7 +80,12 @@ void Q1(){
 	
 }
 void Q2(){
-	/*				Chapter1 연습 2				 */
+	/*				
+	Chapter1 연습 2				 
+	섭씨 0도에서 100도까지를 5도 단위로 화씨 온도로 변환하여 출력하는
+	프로그램을 작성하라. 섭씨 온도를 화씨로 변환하는 규칙은 다음과 같다.
+	°F = °C × 1.8 + 32
+	*/
 	int a=0;
 	
 	for(a=MIN;a<=MAX;a+=STEP){
@@ -84,7 +94,11 @@ void Q2(){
 	}
 }
 void Q3(){
-	/*				Chapter1 연습 3				 */
+	/*				
+	Chapter1 연습 3		
+	입력으로 세 정수 a, b, c를 받은 후 오름차순으로 정렬하여 출력하는
+	프로그램을 작성하라.
+	*/
 	int a,b,c;
 	scanf("%d %d %d",&a,&b,&c);
 	while(!(a<=b && b<=c)){
